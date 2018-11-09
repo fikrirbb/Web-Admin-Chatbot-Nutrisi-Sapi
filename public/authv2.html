@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin - Chatbot Formulasi Pakan Sapi Potong</title>
+
+    <link href="css/materialize.css" type="text/css" rel="stylesheet">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+
+    <style>
+        html,
+        body,
+        .login-box {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="valign-wrapper row login-box">
+        <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+          <div id="respon"></div>
+            <div class="card-content">
+              <span class="card-title">Masuk Admin</span>
+              <div class="row">
+                <div class="input-field col s12">
+                  <!-- <label for="email">Alamat Email</label> -->
+                  <!-- <input type="email" class="validate" name="email" id="email" /> -->
+                      <input placeholder="john@gmail.com" id="email" type="email">
+                      <label for="email">Alamat Email</label>
+                </div>
+                <div class="input-field col s12">
+                  <!-- <label for="password">Password </label>
+                  <input type="password" class="validate" name="password" id="password" /> -->
+                  <input placeholder="Password" id="password" type="password">
+                  <label for="password">Password</label>
+                </div>
+              </div>
+            </div>
+            <div class="card-action right-align">
+              <!-- <input type="reset" id="reset" class="btn-flat grey-text waves-effect"> -->
+              <button class="btn waves-effect waves-light" onclick="doLogin()" type="submit" name="action">Masuk
+                  <i class="material-icons right">send</i>
+                </button>
+
+              <!-- <input type="button" onclick="doLogin()" class="btn green waves-effect waves-light" value="Masuk"> -->
+            </div>
+        </div>
+      </div>
+
+</body>
+<!-- jQuery Library -->
+<script type="text/javascript" src="vendors/jquery-3.2.1.min.js"></script>
+<!--materialize js-->
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<!--custom-script.js - Add your own theme custom JS-->
+<script type="text/javascript" src="js/custom-script-login.js"></script>
+<script>
+
+</script>
+</html>

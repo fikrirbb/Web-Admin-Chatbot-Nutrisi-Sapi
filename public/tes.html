@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>CRUD</title>
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+
+        crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+
+        crossorigin="anonymous">
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+
+        crossorigin="anonymous"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-firestore.js"></script>
+
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+        <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+
+        <div style="width:80%">
+
+        <! — Button trigger modal →
+
+        <button id="btnAdd" type="button" class="btn btn-primary">
+
+        Add
+
+        </button>
+
+        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+
+        <thead>
+
+        <tr>
+
+        <th></th>
+
+        <th></th>
+
+        <th>Name</th>
+
+        <th>Email</th>
+
+        <th>Phone</th>
+
+        </tr>
+
+        </thead>
+
+        </table>
+
+        </div>
+
+        <! — Modal →
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+
+        <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+
+        <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+        <span aria-hidden="true">&times;</span>
+
+        </button>
+
+        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+
+        </div>
+
+        <div class="modal-body">
+
+        <form>
+
+        <input type="hidden" id="hd-id">
+
+        <div class="form-group">
+
+        <label for="txt-name" class="control-label">Name:</label>
+
+        <input type="text" class="form-control" id="txt-name">
+
+        </div>
+
+        <div class="form-group">
+
+        <label for="txt-email" class="control-label">Email:</label>
+
+        <input type="text" class="form-control" id="txt-email">
+
+        </div>
+
+        <div class="form-group">
+
+        <label for="txt-phone" class="control-label">Phone:</label>
+
+        <input type="text" class="form-control" id="txt-phone">
+
+        </div>
+
+        </form>
+
+        </div>
+
+        <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+        <button id="btnSave" type="button" class="btn btn-primary">Save</button>
+
+        <button id="btnDelete" type="button" class="btn btn-error">Delete</button>
+
+        </div>
+
+        </div>
+
+        </div>
+
+        </div>
+
+        </body>
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+        <span aria-hidden="true">&times;</span>
+
+        </button>
+
+        </div>
+
+        </html>
+
+        <script>
+
+        // your web config
+        var config = {
+	apiKey: "AIzaSyBRjWI-p2T6oRAhDlpHOlsch78NKRSpXeo",
+	authDomain: "paknutrisisapi.firebaseapp.com",
+	databaseURL: "https://paknutrisisapi.firebaseio.com",
+	projectId: "paknutrisisapi",
+	storageBucket: "paknutrisisapi.appspot.com",
+	messagingSenderId: "282024983084"
+  };
+  firebase.initializeApp(config);
+        // end web config
+
+        var auth;
+
+        var storage;
+
+        var db;
+
+        var dtTable;
+
+        function initFirebase() {
+
+        console.log("init firebase");
+
+        auth = firebase.auth();
+
+        storage = firebase.storage();
+
+        db = firebase.firestore();
+
+        //onAuthStateChanged(this);
+
+        }
+
+        function getData() {
+
+        var query = db.collection("employees");
+
+        query.orderBy("createDate", "desc")
+
+        .get().then(function (docData) {
+
+        if (docData.size) {
+
+        var arrObj = [];
+
+        docData.forEach(function (data) {
+
+        var obj = data.data();
+
+        obj.id = data.id; // assign id to data;
+
+        arrObj.push(obj);
+
+        });
+
+        console.log("data", arrObj);
+
+        dtTable.clear();
+
+        dtTable.rows.add(arrObj);
+
+        //dtTable.draw();
+
+        dtTable.order( [ 0, 'desc' ] ).draw();
+
+        } else {
+
+        }
+
+        }, function (error) {
+
+        console.log("error=", error);
+
+        });
+
+        }
+
+        function saveData() {
+
+        var id = $("#hd-id").val();
+
+        var name = $("#txt-name").val();
+
+        var email = $("#txt-email").val();
+
+        var phone = $("#txt-phone").val();
+
+        var data = {
+
+        name: name,
+
+        email: email,
+
+        phone: phone
+
+        }
+
+        if (!data.id) {
+
+        addDB(data);
+
+        } else {
+
+        updateDB(data);
+
+        }
+
+        }
+
+        function deleteData() {
+
+        var id = $("#hd-id").val();
+
+        deleteDB(id);
+
+        }
+
+        function addDB(obj) {
+
+        obj.createDate = firebase.firestore.FieldValue.serverTimestamp();
+
+        db.collection("employees").doc().set(obj)
+
+        .then(function () {
+
+        getData();
+
+        $('myModal').modal('toggle');
+
+        })
+
+        .catch(function (error) {
+
+        console.error("Error writing document: ", error);
+
+        });
+
+        }
+
+        function updateDB(obj) {
+
+        obj.updateDate = firebase.firestore.FieldValue.serverTimestamp();
+
+        db.collection("employees").doc(obj.id).update(obj)
+
+        .then(function () {
+
+        getData();
+
+        $('#myModal').modal('toggle');
+
+        });
+
+        }
+
+        function deleteDB(id) {
+
+        db.collection("employees").doc(id).delete()
+
+        .then(function () {
+
+        getData();
+
+        $('#myModal').modal('toggle');
+
+        });
+
+        }
+
+        function clearInput() {
+
+        $("#hd-id").val('');
+
+        $("#txt-name").val('');
+
+        $("#txt-email").val('');
+
+        $("#txt-phone").val('');
+
+        }
+
+        $(document).ready(function () {
+
+        dtTable = $('#example').DataTable({
+
+        columns: [
+
+        { data: "createDate" },
+
+        { data: "id" },
+
+        { data: "name" },
+
+        { data: "email" },
+
+        { data: "phone" }
+
+        ],
+
+        columnDefs: [
+
+        { targets: [0], visible: false },
+
+        { targets: [1], visible: false }
+
+        ]
+
+        });
+
+        dtTable.on('click', 'tr', function () {
+
+        if ($(this).hasClass('selected')) {
+
+        $(this).removeClass('selected');
+
+        }
+
+        else {
+
+        dtTable.$('tr.selected').removeClass('selected');
+
+        $(this).addClass('selected');
+
+        }
+
+        if (dtTable.row(this).data()) {
+
+        var selectedData = dtTable.row(this).data();
+
+        //console.log("select=", selectedData);
+
+        clearInput();
+
+        $("#hd-id").val(selectedData.id);
+
+        $("#txt-name").val(selectedData.name);
+
+        $("#txt-email").val(selectedData.email);
+
+        $("#txt-phone").val(selectedData.phone);
+
+        $('#myModal').modal('show')
+
+        $("#btnDelete").show();
+
+        }
+
+        });
+
+        $("#btnAdd").on('click', function () {
+
+        clearInput();
+
+        $('#myModal').modal('show')
+
+        $("#btnDelete").hide();
+
+        });
+
+        $("#btnSave").on('click', function () {
+
+        saveData();
+
+        });
+
+        $("#btnDelete").on('click', function () {
+
+        deleteData();
+
+        });
+
+        initFirebase();
+
+        getData();
+
+        });
+
+        </script>
+</html>
