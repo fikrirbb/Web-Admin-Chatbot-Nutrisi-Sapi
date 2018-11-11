@@ -88,15 +88,19 @@ firebase.initializeApp(config);
 
 	const db = firebase.firestore();
 
-	function addSapi() {
-		db.collection("JenisSapi").add({
-			jnNama: $("#nSapi").val(),
-			jnDeskripsi: $("#dSapi").val()
-		})
-		.then(function(docRef) {
-				console.log("Document written with ID: ", docRef.id);
-		})
-		.catch(function(error) {
-				console.error("Error adding document: ", error);
-		});
+	function editSapi(idSapi, nSapi, dSapi) {
+		$('#modal2').modal('open');
+		$("#eidSapi").val(idSapi);
+		$("#enSapi").val(nSapi);
+		$("#edSapi").val(dSapi);
+}
+
+	function removeSapi(id) {
+		$("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
+		db.collection("JenisSapi").doc(id).delete().then(function() {
+			$("#respon").html("");
+			console.log("Document successfully deleted!");
+	}).catch(function(error) {
+			console.error("Error removing document: ", error);
+	});
 	}

@@ -10,131 +10,142 @@
       </blockquote>
       <button class="btn waves-effect waves-light modal-trigger" data-target="modal1" type="submit" name="action">Tambah Data <i class="material-icons left">create_new_folder</i>
       </button>
-      <!-- Modal Structure -->
-      <div id="modal1" class="modal modal-fixed-footer bottom-sheet">
-        <div class="modal-content">
-          <blockquote>
-            <h4 class="header2">Input Jenis Sapi</h4>
-          </blockquote>
-          <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="nSapi" type="text">
-                  <label for="nSapi">Nama Jenis Sapi</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <textarea id="dSapi" class="materialize-textarea"></textarea>
-                  <label for="dSapi">Deskripsi Jenis Sapi</label>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                      <div class="file-field input-field">
-                          <div class="btn">
-                            <span>Gambar</span>
-                            <input type="file">
-                          </div>
-                          <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
-                          </div>
-                        </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <a href="#" onclick="addSapi()" class="modal-close waves-effect waves btn-flat">Simpan</a>
-        </div>
-      </div>
-
-      <!-- Modal Structure -->
-      <div id="modalSapiEdit" class="modal modal-fixed-footer bottom-sheet">
+      <!-- MODAL INPUT -->
+      <div id="modal1" class="modal bottom-sheet modal-fixed-footer">
+        <form id="addsapi_form">
           <div class="modal-content">
-            <blockquote>
-              <h4 class="header2">Edit Jenis Sapi</h4>
-            </blockquote>
+            <h4>Input Jenis Sapi</h4>
             <div class="row">
-              <form class="col s12">
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input id="nSapiedit" type="text">
-                    <label for="nSapiedit">Nama Jenis Sapi</label>
-                  </div>
+              <div class="input-field col s12">
+                <input id="nSapi" type="text" class="validate" required="">
+                <label for="nSapi">Nama Jenis Sapi</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="dSapi" class="materialize-textarea" required=""></textarea>
+                <label for="dSapi">Deskripsi</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <div class="file-field input-field">
+                  <div class="btn">
+                    <i class="material-icons left">image</i>
+                    <input type="file"></div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text"></div>
                 </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <textarea id="dSapiedit" class="materialize-textarea"></textarea>
-                    <label for="dSapiedit">Deskripsi Jenis Sapi</label>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                        <div class="file-field input-field">
-                            <div class="btn">
-                              <span>Gambar</span>
-                              <input type="file">
-                            </div>
-                            <div class="file-path-wrapper">
-                              <input class="file-path validate" type="text">
-                            </div>
-                          </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
-            <a href="#" onclick="editSapi()" class="modal-close waves-effect waves btn-flat">Update</a>
+            <input class="waves-effect waves-green btn" type="submit" value="Simpan">
+            <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
           </div>
-        </div>
-      <br>
-      <!-- <div class="row mt-1">
-          <div class="col s12 m6 l3">
-              <div class="card small">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="images/gallary/19.png">
-                </div>
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4"> +doc.data().jnNama+
-                      <i class="material-icons right">more_vert</i>
-                    </span>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">Card Title
-                      <i class="material-icons right">close</i>
-                      </i>
-                    </span>
-                  <p>+doc.data().jnDeskripsi+</p>
-                </div>
-                <div class="card-action">
-                  <a class="right" href="#">Edit</a>
-                  <a class="right" href="#">Remove</a>
+        </form>
+      </div>
+      <!-- MODAL EDIT -->
+      <div id="modal2" class="modal bottom-sheet modal-fixed-footer">
+          <form id="editsapi_form">
+            <div class="modal-content">
+              <h4>Edit Jenis Sapi</h4>
+              <input type="text" name="" id="eidSapi" hidden>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="enSapi" type="text" class="validate" required="">
+                  <label for="enSapi" class="active">Nama Jenis Sapi</label>
                 </div>
               </div>
-            </div> -->
-        <div class="row mt-1">
-            <div id="konten"></div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="edSapi" class="materialize-textarea" required=""></textarea>
+                  <label for="edSapi" class="active">Deskripsi</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <div class="file-field input-field">
+                    <div class="btn">
+                      <i class="material-icons left">image</i>
+                      <input type="file"></div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input class="waves-effect waves-green btn" type="submit" value="Update">
+              <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
+            </div>
+          </form>
         </div>
+      <br>
+      <div class="row mt-1">
+        <div id="konten"></div>
       </div>
-      <script>
-  $(document).ready(function(){
-    $('.modal').modal();
-    $("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
-
-    const db = firebase.firestore();
-    db.collection("JenisSapi").get().then(function(querySnapshot) {
-      $("#respon").html("");
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            var div_data = '<div class="col s12 m6 l3"> <div class="card small"> <div class="card-image waves-effect waves-block waves-light"> <img class="activator" src="images/gallary/19.png"> </div> <div class="card-content"> <span class="card-title activator grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">more_vert</i> </span> </div> <div class="card-reveal"> <span class="card-title grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">close</i> </i> </span> <p>'+doc.data().jnDeskripsi+'</p> </div> <div class="card-action"> <a class="right" href="#">Remove</a> <a class="right modal-trigger" href="#modalSapiEdit">Edit</a> </div> </div>';
-             $("#konten").append(div_data);
-            console.log(doc.id, " => ", doc.data().jnNama);
-        });
+    </div>
+    <script>
+    $(document).ready(function(){
+      $('.modal').modal();
+      $("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
+      const db = firebase.firestore();
+      db.collection("JenisSapi")
+      .onSnapshot(function(querySnapshot) {
+          var div_data = "";
+          querySnapshot.forEach(function(doc) {
+              div_data += '<div class="col s12 m6 l3"> <div class="card small"> <div class="card-image waves-effect waves-block waves-light"> <img class="activator" src="images/gallary/19.png"> </div> <div class="card-content"> <span class="card-title activator grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">more_vert</i> </span> </div> <div class="card-reveal"> <span class="card-title grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">close</i> </i> </span> <p>'+doc.data().jnDeskripsi+'</p> </div> <div class="card-action"> <a class="right" href="javascript:removeSapi('+"'"+doc.id+"'"+')">Remove</a> <a class="right modal-trigger" href="#modal2" onclick="editSapi('+"'"+doc.id+"'"+','+"'"+doc.data().jnNama+"'"+','+"'"+doc.data().jnDeskripsi+"'"+')">Edit</a> </div> </div> </div>';
+          });
+          $("#konten").html(div_data);
+          $("#respon").html("");
       });
-
+////////////////////////////////
+      // db.collection("JenisSapi").get().then(function(querySnapshot) {
+      //   $("#respon").html("");
+      //     querySnapshot.forEach(function(doc) {
+      //         // doc.data() is never undefined for query doc snapshots
+      //         var div_data = '<div class="col s12 m6 l3"> <div class="card small"> <div class="card-image waves-effect waves-block waves-light"> <img class="activator" src="images/gallary/19.png"> </div> <div class="card-content"> <span class="card-title activator grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">more_vert</i> </span> </div> <div class="card-reveal"> <span class="card-title grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">close</i> </i> </span> <p>'+doc.data().jnDeskripsi+'</p> </div> <div class="card-action"> <a class="right" href="javascript:removeSapi('+"'"+doc.id+"'"+')">Remove</a> <a class="right modal-trigger" href="#modalSapiEdit">Edit</a> </div> </div>';
+      //          $("#konten").append(div_data);
+      //         console.log(doc.id, " => ", doc.data().jnNama);
+      //     });
+      //   });
+///////////////////////////////////////////////
+      $("#editsapi_form").submit(function(e) {
+      e.preventDefault();
+      $("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
+      $('.modal').modal('close');
+      // To update age and favorite color:
+      id = $("#eidSapi").val()
+      db.collection("JenisSapi").doc(id).update({
+        jnNama: $("#enSapi").val(),
+        jnDeskripsi: $("#edSapi").val()
+      })
+      .then(function() {
+          console.log("Document successfully updated!");
+      })
+      .catch(function(error) {
+          console.error("Error updating document: ", error);
+      });
     });
-      </script>
+/////////////////////////////////////////////////////////////////
+$("#addsapi_form").submit(function(e) {
+      e.preventDefault();
+      $("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
+      $('.modal').modal('close');
+      db.collection("JenisSapi").add({
+        jnNama: $("#nSapi").val(),
+        jnDeskripsi: $("#dSapi").val()
+      })
+      .then(function(docRef) {
+        $("#respon").html("");
+        $("#nSapi").val('');
+        $("#dSapi").val('')
+          console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
+    });
+      });
+        </script>
