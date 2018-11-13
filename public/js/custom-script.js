@@ -81,7 +81,7 @@ firebase.initializeApp(config);
     $('#left-sidebar-nav a').click(function(e) {
       e.preventDefault();
       $("#content").load(e.target.href);
-	})
+	});
 	});
 
 	console.log("done");
@@ -95,9 +95,48 @@ firebase.initializeApp(config);
 		$("#edSapi").val(dSapi);
 }
 
+function editPakan(idPakan, nPakan, dPakan) {
+	$('#modal2').modal('open');
+	$("#eidPakan").val(idPakan);
+	$("#enPakan").val(nPakan);
+	$("#edPakan").val(dPakan);
+}
+
+function editNutrisiSapi(idNSapi, ntBb, ntPbb, ntBk, ntTdn, ntPk, ntP, ntCa) {
+	$('#modal2').modal('open');
+	$("#eidNSapi").val(idNSapi);
+	$("#entBb").val(ntBb);
+	$("#entPbb").val(ntPbb);
+	$("#entBk").val(ntBk);
+	$("#entTdn").val(ntTdn);
+	$("#entPk").val(ntPk);
+	$("#entP").val(ntP);
+	$("#entCa").val(ntCa);
+}
+
 	function removeSapi(id) {
 		$("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
 		db.collection("JenisSapi").doc(id).delete().then(function() {
+			$("#respon").html("");
+			console.log("Document successfully deleted!");
+	}).catch(function(error) {
+			console.error("Error removing document: ", error);
+	});
+	}
+
+	function removePakan(id) {
+		$("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
+		db.collection("JenisPakan").doc(id).delete().then(function() {
+			$("#respon").html("");
+			console.log("Document successfully deleted!");
+	}).catch(function(error) {
+			console.error("Error removing document: ", error);
+	});
+	}
+
+	function removeNutrisiSapi(id) {
+		$("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
+		db.collection("NutrisiSapi").doc(id).delete().then(function() {
 			$("#respon").html("");
 			console.log("Document successfully deleted!");
 	}).catch(function(error) {

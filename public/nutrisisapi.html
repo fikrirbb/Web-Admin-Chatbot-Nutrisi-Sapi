@@ -3,17 +3,17 @@
           <div class="divider"></div>
           <!--Responsive Table-->
           <div class="divider"></div>
+          <div id="respon"></div>
           <div id="responsive-table">
             <blockquote>
               <h4 class="header">Kebutuhan Nutrisi Sapi Potong</h4>
             </blockquote>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Tambah Data
-                <i class="material-icons left">create_new_folder</i>
-              </button>
-              <br>
+            <button class="btn waves-effect waves-light modal-trigger" data-target="modal1" type="submit" name="action">Tambah Data <i class="material-icons left">create_new_folder</i>
+            </button>
+            <br>
             <div class="row">
               <div class="col s12">
-                <table class="responsive-table" id="example">
+                <table class="responsive-table" id="tbNutrisiSapi">
                   <thead>
                     <tr>
                       <th data-field="id">Bobot Badan (Kg)</th>
@@ -27,70 +27,6 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Alvin</td>
-                      <td>Eclair</td>
-                      <td>$0.87</td>
-                      <td>$1.87</td>
-                      <td>Yes</td>
-                      <td>Yes</td>
-                      <td>Yes</td>
-                      <td>
-                          <a class="btn-floating waves-effect waves-light cyan">
-                              <i class="material-icons">mode_edit</i>
-                            </a>
-                            <a class="btn-floating waves-effect waves-light red accent-2 mr-2">
-                          <i class="material-icons">clear</i>
-                          </a></td>
-                    </tr>
-                    <tr>
-                      <td>Alan</td>
-                      <td>Jellybean</td>
-                      <td>$3.76</td>
-                      <td>$10.87</td>
-                      <td>No</td>
-                      <td>Yes</td>
-                      <td>Yes</td>
-                      <td>
-                          <a class="btn-floating waves-effect waves-light cyan">
-                              <i class="material-icons">mode_edit</i>
-                            </a>
-                            <a class="btn-floating waves-effect waves-light red accent-2 mr-2">
-                          <i class="material-icons">clear</i>
-                          </a></td>
-                    </tr>
-                    <tr>
-                      <td>Jonathan</td>
-                      <td>Lollipop</td>
-                      <td>$7.00</td>
-                      <td>$12.87</td>
-                      <td>Yes</td>
-                      <td>Yes</td>
-                      <td>Yes</td>
-                      <td>
-                          <a class="btn-floating waves-effect waves-light cyan">
-                              <i class="material-icons">mode_edit</i>
-                            </a>
-                            <a class="btn-floating waves-effect waves-light red accent-2 mr-2">
-                          <i class="material-icons">clear</i>
-                          </a></td>
-                    </tr>
-                    <tr>
-                      <td>Shannon</td>
-                      <td>KitKat</td>
-                      <td>$9.99</td>
-                      <td>$14.87</td>
-                      <td>No</td>
-                      <td>Yes</td>
-                      <td>Yes</td>
-                      <td>
-                          <a class="btn-floating waves-effect waves-light cyan">
-                              <i class="material-icons">mode_edit</i>
-                            </a>
-                            <a class="btn-floating waves-effect waves-light red accent-2 mr-2">
-                          <i class="material-icons">clear</i>
-                          </a></td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -100,3 +36,174 @@
         <!-- //////////////////////////////////////////////////////////////////////////// -->
         <!-- END RIGHT SIDEBAR NAV-->
       </div>
+
+<!-- MODAL INPUT -->
+<div id="modal1" class="modal bottom-sheet modal-fixed-footer">
+  <form id="addnutrisisapi_form">
+    <div class="modal-content">
+      <h4>Input Nutrisi Sapi</h4>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="ntBb" type="text" class="validate" required="">
+          <label for="ntBb">Bobot Badan (Kg)</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="ntPbb" type="text" class="validate" required="">
+          <label for="ntPbb">PBB/hari (Kg)</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="ntBk" type="text" class="validate" required="">
+          <label for="ntBk">Bahan Kering (Kg)</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="ntTdn" type="text" class="validate" required="">
+          <label for="ntTdn">TDN (Kg)</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="ntPk" type="text" class="validate" required="">
+          <label for="ntPk">PK (gr)</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="ntCa" type="text" class="validate" required="">
+          <label for="ntCa">Ca (gr)</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="ntP" type="text" class="validate" required="">
+          <label for="ntP">P (gr)</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <input class="waves-effect waves-green btn" type="submit" value="Simpan">
+      <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
+    </div>
+  </form>
+</div>
+<!-- MODAL EDIT -->
+<div id="modal2" class="modal bottom-sheet modal-fixed-footer">
+    <form id="editnutrisisapi_form">
+      <div class="modal-content">
+        <h4>Edit Jenis Sapi</h4>
+        <input type="text" name="" id="eidNSapi" hidden>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="entBb" type="text" class="validate" required="">
+            <label for="entBb" class="active">Bobot Badan (Kg)</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="entPbb" type="text" class="validate" required="">
+            <label for="entBb" class="active">PBB/hari (Kg)</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="entBk" type="text" class="validate" required="">
+            <label for="entBk" class="active">Bahan Kering (Kg)</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="entTdn" type="text" class="validate" required="">
+            <label for="entTdn" class="active">TDN (Kg)</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="entPk" type="text" class="validate" required="">
+            <label for="entPk" class="active">PK (gr)</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="entCa" type="text" class="validate" required="">
+            <label for="entCa" class="active">Ca (gr)</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="entP" type="text" class="validate" required="">
+            <label for="entP" class="active">P (gr)</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input class="waves-effect waves-green btn" type="submit" value="Update">
+        <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
+      </div>
+    </form>
+  </div>
+
+  <script>
+   $(document).ready(function(){
+    $('.modal').modal();
+    $("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
+    const db = firebase.firestore();
+      db.collection("NutrisiSapi")
+      .onSnapshot(function(querySnapshot) {
+          var div_data = "";
+          querySnapshot.forEach(function(doc) {
+            div_data += '<tr>'// need to change closing tag to an opening `<tr>` tag.
+            +'<td>'+doc.data().ntBb+'</td>'
+            +'<td>'+doc.data().ntPbb+'</td>'
+            +'<td>'+doc.data().ntBk+'</td>'
+            +'<td>'+doc.data().ntTdn+'</td>'
+            +'<td>'+doc.data().ntPk+'</td>'
+            +'<td>'+doc.data().ntCa+'</td>'
+            +'<td>'+doc.data().ntP+'</td>'
+            +'<td><a class="btn-floating waves-effect waves-light cyan modal-trigger" onclick="editNutrisiSapi('+"'"+doc.id+"'"+','+"'"+doc.data().ntBb+"'"+','+"'"+doc.data().ntPbb+"'"+','+"'"+doc.data().ntBk+"'"+','+"'"+doc.data().ntTdn+"'"+','+"'"+doc.data().ntPk+"'"+','+"'"+doc.data().ntP+"'"+','+"'"+doc.data().ntCa+"'"+')" href="#modal2">'
+                      +'<i class="material-icons">mode_edit</i>'
+                  +'</a>'
+                  +'<a class="btn-floating waves-effect waves-light red accent-2 mr-2" href="javascript:removeNutrisiSapi('+"'"+doc.id+"'"+')">'
+                  +'<i class="material-icons">clear</i>'
+                      +'</a></td>'
+            +'</tr>';
+              // div_data += '<div class="col s12 m6 l3"> <div class="card small"> <div class="card-image waves-effect waves-block waves-light"> <img class="activator" src="images/gallary/19.png"> </div> <div class="card-content"> <span class="card-title activator grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">more_vert</i> </span> </div> <div class="card-reveal"> <span class="card-title grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">close</i> </i> </span> <p>'+doc.data().jnDeskripsi+'</p> </div> <div class="card-action"> <a class="right" href="javascript:removeSapi('+"'"+doc.id+"'"+')">Remove</a> <a class="right modal-trigger" href="#modal2" onclick="editSapi('+"'"+doc.id+"'"+','+"'"+doc.data().jnNama+"'"+','+"'"+doc.data().jnDeskripsi+"'"+')">Edit</a> </div> </div> </div>';
+          });
+          $('#tbNutrisiSapi > tbody:last-child').html(div_data);
+          $("#respon").html("");
+      });
+/////////////////////////////////////////////////////
+    $("#editnutrisisapi_form").submit(function(e) {
+      e.preventDefault();
+      $("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
+      $('.modal').modal('close');
+      // To update age and favorite color:
+      id = $("#eidNSapi").val()
+      db.collection("NutrisiSapi").doc(id).update({
+        ntBb: $("#entBb").val(),
+        ntPbb: $("#entPbb").val(),
+        ntBk: $("#entBk").val(),
+        ntTdn: $("#entTdn").val(),
+        ntPk: $("#entPk").val(),
+        ntCa: $("#entCa").val(),
+        ntP: $("#entP").val()
+      })
+      .then(function() {
+          console.log("Document successfully updated!");
+      })
+      .catch(function(error) {
+          console.error("Error updating document: ", error);
+      });
+    });
+/////////////////////////////////////////////////////////////////
+$("#addnutrisisapi_form").submit(function(e) {
+      e.preventDefault();
+      $("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
+      $('.modal').modal('close');
+      db.collection("NutrisiSapi").add({
+        ntBb: $("#ntBb").val(),
+        ntPbb: $("#ntPbb").val(),
+        ntBk: $("#ntBk").val(),
+        ntTdn: $("#ntTdn").val(),
+        ntPk: $("#ntPk").val(),
+        ntCa: $("#ntCa").val(),
+        ntP: $("#ntP").val()
+      })
+      .then(function(docRef) {
+        $("#respon").html("");
+        $("#ntBb").val('');
+        $("#ntPbb").val('');
+        $("#ntBk").val('');
+        $("#ntTdn").val('');
+        $("#ntPk").val('');
+        $("#ntCa").val('');
+        $("#ntP").val('');
+          console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
+    });
+///////////////////////////////////////////////////////////////////
+   });
+  </script>

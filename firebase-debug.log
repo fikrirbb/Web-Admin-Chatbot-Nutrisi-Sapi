@@ -1,0 +1,28 @@
+[debug] [2018-11-13T04:07:31.732Z] ----------------------------------------------------------------------
+[debug] [2018-11-13T04:07:31.741Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\FiND\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-11-13T04:07:31.742Z] CLI Version:   4.2.1
+[debug] [2018-11-13T04:07:31.742Z] Platform:      win32
+[debug] [2018-11-13T04:07:31.742Z] Node Version:  v8.11.3
+[debug] [2018-11-13T04:07:31.743Z] Time:          Tue Nov 13 2018 11:07:31 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-11-13T04:07:31.744Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-11-13T04:07:31.799Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-11-13T04:07:31.802Z] > authorizing via signed-in user
+[debug] [2018-11-13T04:07:31.809Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-11-13T04:07:31.810Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+
+[debug] [2018-11-13T04:07:32.510Z] <<< HTTP RESPONSE 200
+[debug] [2018-11-13T04:07:32.522Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/paknutrisisapi2  
+ 
+[debug] [2018-11-13T04:07:33.792Z] <<< HTTP RESPONSE 200
+[debug] [2018-11-13T04:07:33.795Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/paknutrisisapi2  
+ 
+[debug] [2018-11-13T04:07:35.316Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\xampp\htdocs\Web-Admin-Chatbot-Nutrisi-Sapi'...
+[info] 
+[debug] [2018-11-13T04:07:35.336Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/452244835820/clients/_:getWebAppConfig  
+ 
+[debug] [2018-11-13T04:07:36.109Z] <<< HTTP RESPONSE 200
+[info] i  hosting[paknutrisisapi2]: Serving hosting files from: public
+[info] +  hosting[paknutrisisapi2]: Local server: http://localhost:5000
