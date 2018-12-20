@@ -114,6 +114,18 @@ function editNutrisiSapi(idNSapi, ntBb, ntPbb, ntBk, ntTdn, ntPk, ntP, ntCa) {
 	$("#entCa").val(ntCa);
 }
 
+function editNutrisiPakan(eidNPakan, entNPakan, entBk, entTdn, entPk, entCa, entP) {
+	$('#modal2').modal('open');
+	$("#eidNPakan").val(eidNPakan);
+	$("#entNPakan").val(entNPakan);
+  $("#entBk").val(entBk);
+  $("#entTdn").val(entTdn);
+  $("#entPk").val(entPk);
+  $("#entCa").val(entCa);
+	$("#entP").val(entP);
+
+	$('#entNPakan').material_select();
+}
 	function removeSapi(id) {
 		$("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
 		db.collection("JenisSapi").doc(id).delete().then(function() {
@@ -137,6 +149,16 @@ function editNutrisiSapi(idNSapi, ntBb, ntPbb, ntBk, ntTdn, ntPk, ntP, ntCa) {
 	function removeNutrisiSapi(id) {
 		$("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
 		db.collection("NutrisiSapi").doc(id).delete().then(function() {
+			$("#respon").html("");
+			console.log("Document successfully deleted!");
+	}).catch(function(error) {
+			console.error("Error removing document: ", error);
+	});
+	}
+
+	function removeNutrisiPakan(id) {
+		$("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
+		db.collection("NutrisiPakan").doc(id).delete().then(function() {
 			$("#respon").html("");
 			console.log("Document successfully deleted!");
 	}).catch(function(error) {

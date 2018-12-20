@@ -4,15 +4,6 @@
         <!--Responsive Table-->
         <div class="divider"></div>
         <div id="respon"></div>
-        <div class="input-field col s12 m6">
-            <select class="icons">
-              <option value="" disabled selected>Choose your option</option>
-              <option value="" data-icon="images/sample-1.jpg" class="left">example 1</option>
-              <option value="" data-icon="images/office.jpg" class="left">example 2</option>
-              <option value="" data-icon="images/yuna.jpg" class="left">example 3</option>
-            </select>
-            <label>Images in select</label>
-          </div>
         <div id="responsive-table">
           <blockquote>
             <h4 class="header">Kebutuhan Nutrisi Pakan Potong</h4>
@@ -51,9 +42,15 @@
   <div class="modal-content">
     <h4>Input Nutrisi Pakan</h4>
     <div class="row">
+      <div class="input-field col s12 m6">
+          <select class="icons" id="ntNPakan" required="">
+            <option value="" disabled selected>Nama Pakan</option>
+          </select>
+          <label>Pilih Jenis Pakan</label>
+        </div>
       <div class="input-field col s6">
-        <input id="ntBb" type="text" class="validate" required="">
-        <label for="ntBb">Pakan Hijauan</label>
+        <input id="ntBk" type="text" class="validate" required="">
+        <label for="ntBk">Bahan Kering (Kg)</label>
       </div>
       <div class="input-field col s6">
         <input id="ntTdn" type="text" class="validate" required="">
@@ -73,7 +70,6 @@
       </div>
     </div>
   </div>
-  <div class="modal-footer">
     <input class="waves-effect waves-green btn" type="submit" value="Simpan">
     <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
   </div>
@@ -86,14 +82,12 @@
       <h4>Edit Jenis Pakan</h4>
       <input type="text" name="" id="eidNPakan" hidden>
       <div class="row">
-        <div class="input-field col s6">
-          <input id="entBb" type="text" class="validate" required="">
-          <label for="entBb" class="active">Bobot Badan (Kg)</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="entPbb" type="text" class="validate" required="">
-          <label for="entBb" class="active">PBB/hari (Kg)</label>
-        </div>
+          <div class="input-field col s12 m6">
+              <select class="icons" id="entNPakan" required="">
+                <option value="" disabled selected>Nama Pakan</option>
+              </select>
+              <label>Pilih Jenis Pakan</label>
+            </div>
         <div class="input-field col s6">
           <input id="entBk" type="text" class="validate" required="">
           <label for="entBk" class="active">Bahan Kering (Kg)</label>
@@ -125,32 +119,46 @@
 
 <script>
  $(document).ready(function(){
-  $('select').formSelect();
   $('.modal').modal();
   $("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
   const db = firebase.firestore();
+  db.collection("JenisPakan").get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        var option = $('<option value="'+doc.id+'" data-icon="images/yuna.jpg" class="left">'+doc.data().jnNama+'</option>');
+        var option2 = $('<option value="'+doc.id+'" data-icon="images/yuna.jpg" class="left">'+doc.data().jnNama+'</option>');
+        $('#ntNPakan').append(option);
+        $('#entNPakan').append(option2);
+      });
+  $('select').material_select();
+  });
+
     db.collection("NutrisiPakan")
     .onSnapshot(function(querySnapshot) {
         var div_data = "";
         querySnapshot.forEach(function(doc) {
-          div_data += '<tr>'// need to change closing tag to an opening `<tr>` tag.
-          +'<td>'+doc.data().ntBb+'</td>'
-          +'<td>'+doc.data().ntPbb+'</td>'
-          +'<td>'+doc.data().ntBk+'</td>'
-          +'<td>'+doc.data().ntTdn+'</td>'
-          +'<td>'+doc.data().ntPk+'</td>'
-          +'<td>'+doc.data().ntCa+'</td>'
-          +'<td>'+doc.data().ntP+'</td>'
-          +'<td><a class="btn-floating waves-effect waves-light cyan modal-trigger" onclick="editNutrisiPakan('+"'"+doc.id+"'"+','+"'"+doc.data().ntBb+"'"+','+"'"+doc.data().ntPbb+"'"+','+"'"+doc.data().ntBk+"'"+','+"'"+doc.data().ntTdn+"'"+','+"'"+doc.data().ntPk+"'"+','+"'"+doc.data().ntP+"'"+','+"'"+doc.data().ntCa+"'"+')" href="#modal2">'
-                    +'<i class="material-icons">mode_edit</i>'
-                +'</a>'
-                +'<a class="btn-floating waves-effect waves-light red accent-2 mr-2" href="javascript:removeNutrisiPakan('+"'"+doc.id+"'"+')">'
-                +'<i class="material-icons">clear</i>'
-                    +'</a></td>'
-          +'</tr>';
-            // div_data += '<div class="col s12 m6 l3"> <div class="card small"> <div class="card-image waves-effect waves-block waves-light"> <img class="activator" src="images/gallary/19.png"> </div> <div class="card-content"> <span class="card-title activator grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">more_vert</i> </span> </div> <div class="card-reveal"> <span class="card-title grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">close</i> </i> </span> <p>'+doc.data().jnDeskripsi+'</p> </div> <div class="card-action"> <a class="right" href="javascript:removePakan('+"'"+doc.id+"'"+')">Remove</a> <a class="right modal-trigger" href="#modal2" onclick="editPakan('+"'"+doc.id+"'"+','+"'"+doc.data().jnNama+"'"+','+"'"+doc.data().jnDeskripsi+"'"+')">Edit</a> </div> </div> </div>';
-        });
-        $('#tbNutrisiPakan > tbody:last-child').html(div_data);
+          db.collection("JenisPakan").doc(doc.data().pntId)
+          .get().then(function(doc2) {
+                div_data += '<tr>'// need to change closing tag to an opening `<tr>` tag.
+              +'<td>'+doc2.data().jnNama+'</td>'
+              +'<td>'+doc.data().pntBk+'</td>'
+              +'<td>'+doc.data().pntTdn+'</td>'
+              +'<td>'+doc.data().pntPk+'</td>'
+              +'<td>'+doc.data().pntCa+'</td>'
+              +'<td>'+doc.data().pntP+'</td>'
+              +'<td><a class="btn-floating waves-effect waves-light cyan modal-trigger" onclick="editNutrisiPakan('+"'"+doc.id+"'"+','+"'"+doc.data().pntId+"'"+','+"'"+doc.data().pntBk+"'"+','+"'"+doc.data().pntTdn+"'"+','+"'"+doc.data().pntPk+"'"+','+"'"+doc.data().pntCa+"'"+','+"'"+doc.data().pntP+"'"+')" href="#modal2">'
+                        +'<i class="material-icons">mode_edit</i>'
+                    +'</a>'
+                    +'<a class="btn-floating waves-effect waves-light red accent-2 mr-2" href="javascript:removeNutrisiPakan('+"'"+doc.id+"'"+')">'
+                    +'<i class="material-icons">clear</i>'
+                        +'</a></td>'
+              +'</tr>';
+                // div_data += '<div class="col s12 m6 l3"> <div class="card small"> <div class="card-image waves-effect waves-block waves-light"> <img class="activator" src="images/gallary/19.png"> </div> <div class="card-content"> <span class="card-title activator grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">more_vert</i> </span> </div> <div class="card-reveal"> <span class="card-title grey-text text-darken-4">'+doc.data().jnNama+'<i class="material-icons right">close</i> </i> </span> <p>'+doc.data().jnDeskripsi+'</p> </div> <div class="card-action"> <a class="right" href="javascript:removePakan('+"'"+doc.id+"'"+')">Remove</a> <a class="right modal-trigger" href="#modal2" onclick="editPakan('+"'"+doc.id+"'"+','+"'"+doc.data().jnNama+"'"+','+"'"+doc.data().jnDeskripsi+"'"+')">Edit</a> </div> </div> </div>';
+                $('#tbNutrisiPakan > tbody:last-child').html(div_data);
+
+          }).catch(function(error) {
+              console.log("Error getting document:", error);
+          });
+          });
         $("#respon").html("");
     });
 /////////////////////////////////////////////////////
@@ -161,13 +169,12 @@
     // To update age and favorite color:
     id = $("#eidNPakan").val()
     db.collection("NutrisiPakan").doc(id).update({
-      ntBb: $("#entBb").val(),
-      ntPbb: $("#entPbb").val(),
-      ntBk: $("#entBk").val(),
-      ntTdn: $("#entTdn").val(),
-      ntPk: $("#entPk").val(),
-      ntCa: $("#entCa").val(),
-      ntP: $("#entP").val()
+      pntId: $("#entNPakan").val(),
+      pntBk: $("#entBk").val(),
+      pntTdn: $("#entTdn").val(),
+      pntPk: $("#entPk").val(),
+      pntCa: $("#entCa").val(),
+      pntP: $("#entP").val()
     })
     .then(function() {
         console.log("Document successfully updated!");
@@ -182,18 +189,16 @@ $("#addnutrisiPakan_form").submit(function(e) {
     $("#respon").html("<div class='progress'> <div class='indeterminate'></div> </div>");
     $('.modal').modal('close');
     db.collection("NutrisiPakan").add({
-      ntBb: $("#ntBb").val(),
-      ntPbb: $("#ntPbb").val(),
-      ntBk: $("#ntBk").val(),
-      ntTdn: $("#ntTdn").val(),
-      ntPk: $("#ntPk").val(),
-      ntCa: $("#ntCa").val(),
-      ntP: $("#ntP").val()
+      pntId: $("#ntNPakan").val(),
+      pntBk: $("#ntBk").val(),
+      pntTdn: $("#ntTdn").val(),
+      pntPk: $("#ntPk").val(),
+      pntCa: $("#ntCa").val(),
+      pntP: $("#ntP").val()
     })
     .then(function(docRef) {
       $("#respon").html("");
-      $("#ntBb").val('');
-      $("#ntPbb").val('');
+      $("#ntNPakan").val('');
       $("#ntBk").val('');
       $("#ntTdn").val('');
       $("#ntPk").val('');
